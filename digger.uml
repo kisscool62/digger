@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.digger</OriginalElement>
+  <nodes>
+    <node x="469.0" y="218.0">org.digger.alpha</node>
+    <node x="318.0" y="222.0">org.digger.Sprite</node>
+    <node x="461.0" y="394.0">org.digger._game</node>
+    <node x="142.0" y="44.0">org.digger.Drawing</node>
+    <node x="278.0" y="74.0">org.digger.Monster</node>
+    <node x="-233.0" y="162.0">org.digger.Scores</node>
+    <node x="324.0" y="399.0">org.digger._bag</node>
+    <node x="468.0" y="76.0">org.digger._monster</node>
+    <node x="0.0" y="296.0">org.digger.Input</node>
+    <node x="-191.0" y="275.0">org.digger.Sound</node>
+    <node x="127.0" y="148.0">org.digger.Digger</node>
+    <node x="189.0" y="379.0">org.digger.Bags</node>
+    <node x="-208.0" y="78.0">org.digger.cgagrafx</node>
+    <node x="0.0" y="0.0">org.digger.DiggerRunner</node>
+    <node x="112.0" y="370.0">org.digger.Pc</node>
+    <node x="230.0" y="296.0">org.digger.Main</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.digger.DiggerRunner" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Sprite" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Pc" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Monster">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Main">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Monster" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Pc">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Main" target="org.digger._game">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Sound">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Scores">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Input" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Input">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Sprite">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Bags">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Scores" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Bags" target="org.digger._bag">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Sound" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Monster" target="org.digger._monster">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Digger" target="org.digger.Drawing">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Main" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Bags" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.digger.Drawing" target="org.digger.Digger">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="186.0" y="220.0" />
+  <SelectedNodes>
+    <node>org.digger._bag</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
