@@ -289,7 +289,7 @@ class Drawing {
         dig.getPc().ginten(0);
         drawbackg(dig.getMain().levplan());
         drawfield();
-        dig.getPc().currentSource.newPixels(0, 0, dig.getPc().width, dig.getPc().height);
+        dig.getPc().getCurrentSource().newPixels(0, 0, dig.getPc().getWidth(), dig.getPc().getHeight());
     }
 
     protected void drawtopblob(int x, int y) {
@@ -400,7 +400,7 @@ class Drawing {
             x += 12;
         }
         if (b)
-            dig.getPc().currentSource.newPixels(rx, y, p.length() * 12, 12);
+            dig.getPc().getCurrentSource().newPixels(rx, y, p.length() * 12, 12);
     }
 
     protected void savefield() {

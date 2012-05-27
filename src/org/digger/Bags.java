@@ -66,34 +66,34 @@ class Bags {
         int bag;
         boolean soundfalloffflag = true, soundwobbleoffflag = true;
         for (bag = 1; bag < 8; bag++)
-            if (bagdat[bag].exist) {
-                if (bagdat[bag].gt != 0) {
-                    if (bagdat[bag].gt == 1) {
+            if (bagdat[bag].isExist()) {
+                if (bagdat[bag].getGt() != 0) {
+                    if (bagdat[bag].getGt() == 1) {
                         dig.getSound().soundbreak();
-                        dig.getDrawing().drawgold(bag, 4, bagdat[bag].x, bagdat[bag].y);
+                        dig.getDrawing().drawgold(bag, 4, bagdat[bag].getX(), bagdat[bag].getY());
                         dig.getMain().incpenalty();
                     }
-                    if (bagdat[bag].gt == 3) {
-                        dig.getDrawing().drawgold(bag, 5, bagdat[bag].x, bagdat[bag].y);
+                    if (bagdat[bag].getGt() == 3) {
+                        dig.getDrawing().drawgold(bag, 5, bagdat[bag].getX(), bagdat[bag].getY());
                         dig.getMain().incpenalty();
                     }
-                    if (bagdat[bag].gt == 5) {
-                        dig.getDrawing().drawgold(bag, 6, bagdat[bag].x, bagdat[bag].y);
+                    if (bagdat[bag].getGt() == 5) {
+                        dig.getDrawing().drawgold(bag, 6, bagdat[bag].getX(), bagdat[bag].getY());
                         dig.getMain().incpenalty();
                     }
-                    bagdat[bag].gt++;
-                    if (bagdat[bag].gt == goldtime)
+                    bagdat[bag].setGt(bagdat[bag].getGt() + 1);
+                    if (bagdat[bag].getGt() == goldtime)
                         removebag(bag);
-                    else if (bagdat[bag].v < 9 && bagdat[bag].gt < goldtime - 10)
-                        if ((dig.getMonster().getfield(bagdat[bag].h, bagdat[bag].v + 1) & 0x2000) == 0)
-                            bagdat[bag].gt = goldtime - 10;
+                    else if (bagdat[bag].getV() < 9 && bagdat[bag].getGt() < goldtime - 10)
+                        if ((dig.getMonster().getfield(bagdat[bag].getH(), bagdat[bag].getV() + 1) & 0x2000) == 0)
+                            bagdat[bag].setGt(goldtime - 10);
                 } else
                     updatebag(bag);
             }
         for (bag = 1; bag < 8; bag++) {
-            if (bagdat[bag].dir == 6 && bagdat[bag].exist)
+            if (bagdat[bag].getDir() == 6 && bagdat[bag].isExist())
                 soundfalloffflag = false;
-            if (bagdat[bag].dir != 6 && bagdat[bag].wobbling && bagdat[bag].exist)
+            if (bagdat[bag].getDir() != 6 && bagdat[bag].isWobbling() && bagdat[bag].isExist())
                 soundwobbleoffflag = false;
         }
         if (soundfalloffflag)
@@ -109,20 +109,20 @@ class Bags {
                 bagdat[bag].copyFrom(bagdat1[bag]);
             else
                 bagdat[bag].copyFrom(bagdat2[bag]);
-            if (bagdat[bag].exist)
-                dig.getSprite().movedrawspr(bag, bagdat[bag].x, bagdat[bag].y);
+            if (bagdat[bag].isExist())
+                dig.getSprite().movedrawspr(bag, bagdat[bag].getX(), bagdat[bag].getY());
         }
     }
 
     protected int getbagdir(int bag) {
-        if (bagdat[bag].exist)
-            return bagdat[bag].dir;
+        if (bagdat[bag].isExist())
+            return bagdat[bag].getDir();
         return -1;
     }
 
     private void getgold(int bag) {
         int clbits;
-        clbits = dig.getDrawing().drawgold(bag, 6, bagdat[bag].x, bagdat[bag].y);
+        clbits = dig.getDrawing().drawgold(bag, 6, bagdat[bag].getX(), bagdat[bag].getY());
         dig.getMain().incpenalty();
         if ((clbits & 1) != 0) {
             dig.getScores().scoregold();
@@ -136,8 +136,8 @@ class Bags {
     protected int getnmovingbags() {
         int bag, n = 0;
         for (bag = 1; bag < 8; bag++)
-            if (bagdat[bag].exist && bagdat[bag].gt < 10 &&
-                    (bagdat[bag].gt != 0 || bagdat[bag].wobbling))
+            if (bagdat[bag].isExist() && bagdat[bag].getGt() < 10 &&
+                    (bagdat[bag].getGt() != 0 || bagdat[bag].isWobbling()))
                 n++;
         return n;
     }
@@ -147,25 +147,25 @@ class Bags {
         pushcount = 0;
         goldtime = 150 - dig.getMain().levof10() * 10;
         for (bag = 1; bag < 8; bag++)
-            bagdat[bag].exist = false;
+            bagdat[bag].setExist(false);
         bag = 1;
         for (x = 0; x < 15; x++)
             for (y = 0; y < 10; y++)
                 if (dig.getMain().getlevch(x, y, dig.getMain().levplan()) == 'B')
                     if (bag < 8) {
-                        bagdat[bag].exist = true;
-                        bagdat[bag].gt = 0;
-                        bagdat[bag].fallh = 0;
-                        bagdat[bag].dir = -1;
-                        bagdat[bag].wobbling = false;
-                        bagdat[bag].wt = 15;
-                        bagdat[bag].unfallen = true;
-                        bagdat[bag].x = x * 20 + 12;
-                        bagdat[bag].y = y * 18 + 18;
-                        bagdat[bag].h = x;
-                        bagdat[bag].v = y;
-                        bagdat[bag].xr = 0;
-                        bagdat[bag++].yr = 0;
+                        bagdat[bag].setExist(true);
+                        bagdat[bag].setGt(0);
+                        bagdat[bag].setFallh(0);
+                        bagdat[bag].setDir(-1);
+                        bagdat[bag].setWobbling(false);
+                        bagdat[bag].setWt(15);
+                        bagdat[bag].setUnfallen(true);
+                        bagdat[bag].setX(x * 20 + 12);
+                        bagdat[bag].setY(y * 18 + 18);
+                        bagdat[bag].setH(x);
+                        bagdat[bag].setV(y);
+                        bagdat[bag].setXr(0);
+                        bagdat[bag++].setYr(0);
                     }
         if (dig.getMain().getcplayer() == 0)
             for (int i = 1; i < 8; i++)
@@ -178,15 +178,16 @@ class Bags {
     private boolean pushbag(int bag, int dir) {
         int x, y, h, v, ox, oy, clbits;
         boolean push = true;
-        ox = x = bagdat[bag].x;
-        oy = y = bagdat[bag].y;
-        h = bagdat[bag].h;
-        v = bagdat[bag].v;
-        if (bagdat[bag].gt != 0) {
+        _bag selectedBag = bagdat[bag];
+        ox = x = selectedBag.getX();
+        oy = y = selectedBag.getY();
+        h = selectedBag.getH();
+        v = selectedBag.getV();
+        if (selectedBag.getGt() != 0) {
             getgold(bag);
             return true;
         }
-        if (bagdat[bag].dir == 6 && (dir == 4 || dir == 0)) {
+        if (selectedBag.getDir() == 6 && (dir == 4 || dir == 0)) {
             clbits = dig.getDrawing().drawgold(bag, 3, x, y);
             dig.getMain().incpenalty();
             if (((clbits & 1) != 0) && (dig.getDiggery() >= y))
@@ -207,8 +208,8 @@ class Bags {
                     x -= 4;
                     break;
                 case 6:
-                    if (bagdat[bag].unfallen) {
-                        bagdat[bag].unfallen = false;
+                    if (selectedBag.isUnfallen()) {
+                        selectedBag.setUnfallen(false);
                         dig.getDrawing().drawsquareblob(x, y);
                         dig.getDrawing().drawtopblob(x, y + 21);
                     } else
@@ -228,8 +229,8 @@ class Bags {
                     break;
                 case 0:
                 case 4:
-                    bagdat[bag].wt = 15;
-                    bagdat[bag].wobbling = false;
+                    selectedBag.setWt(15);
+                    selectedBag.setWobbling(false);
                     clbits = dig.getDrawing().drawgold(bag, 0, x, y);
                     dig.getMain().incpenalty();
                     pushcount = 1;
@@ -250,15 +251,15 @@ class Bags {
                     }
             }
             if (push)
-                bagdat[bag].dir = dir;
+                selectedBag.setDir(dir);
             else
-                bagdat[bag].dir = dig.reversedir(dir);
-            bagdat[bag].x = x;
-            bagdat[bag].y = y;
-            bagdat[bag].h = (x - 12) / 20;
-            bagdat[bag].v = (y - 18) / 18;
-            bagdat[bag].xr = (x - 12) % 20;
-            bagdat[bag].yr = (y - 18) % 18;
+                selectedBag.setDir(dig.reversedir(dir));
+            selectedBag.setX(x);
+            selectedBag.setY(y);
+            selectedBag.setH((x - 12) / 20);
+            selectedBag.setV((y - 18) / 18);
+            selectedBag.setXr((x - 12) % 20);
+            selectedBag.setYr((y - 18) % 18);
         }
         return push;
     }
@@ -278,7 +279,7 @@ class Bags {
         boolean push = true;
         for (bag = 1, b = 2; bag < 8; bag++, b <<= 1)
             if ((bits & b) != 0)
-                if (bagdat[bag].gt != 0)
+                if (bagdat[bag].getGt() != 0)
                     getgold(bag);
                 else
                     push = false;
@@ -286,8 +287,9 @@ class Bags {
     }
 
     private void removebag(int bag) {
-        if (bagdat[bag].exist) {
-            bagdat[bag].exist = false;
+        _bag selectedBag = bagdat[bag];
+        if (selectedBag.isExist()) {
+            selectedBag.setExist(false);
             dig.getSprite().erasespr(bag);
         }
     }
@@ -295,29 +297,30 @@ class Bags {
     protected void removebags(int bits) {
         int bag, b;
         for (bag = 1, b = 2; bag < 8; bag++, b <<= 1)
-            if ((bagdat[bag].exist) && ((bits & b) != 0))
+            if ((bagdat[bag].isExist()) && ((bits & b) != 0))
                 removebag(bag);
     }
 
     private void updatebag(int bag) {
         int x, h, xr, y, v, yr, wbl;
-        x = bagdat[bag].x;
-        h = bagdat[bag].h;
-        xr = bagdat[bag].xr;
-        y = bagdat[bag].y;
-        v = bagdat[bag].v;
-        yr = bagdat[bag].yr;
-        switch (bagdat[bag].dir) {
+        _bag selectedBag = bagdat[bag];
+        x = selectedBag.getX();
+        h = selectedBag.getH();
+        xr = selectedBag.getXr();
+        y = selectedBag.getY();
+        v = selectedBag.getV();
+        yr = selectedBag.getYr();
+        switch (selectedBag.getDir()) {
             case -1:
                 if (y < 180 && xr == 0) {
-                    if (bagdat[bag].wobbling) {
-                        if (bagdat[bag].wt == 0) {
-                            bagdat[bag].dir = 6;
+                    if (selectedBag.isWobbling()) {
+                        if (selectedBag.getWt() == 0) {
+                            selectedBag.setDir(6);
                             dig.getSound().soundfall();
                             break;
                         }
-                        bagdat[bag].wt--;
-                        wbl = bagdat[bag].wt % 8;
+                        selectedBag.setWt(selectedBag.getWt() - 1);
+                        wbl = selectedBag.getWt() % 8;
                         if (!((wbl & 1) != 0)) {
                             dig.getDrawing().drawgold(bag, wblanim[wbl >> 1], x, y);
                             dig.getMain().incpenalty();
@@ -325,36 +328,36 @@ class Bags {
                         }
                     } else if ((dig.getMonster().getfield(h, v + 1) & 0xfdf) != 0xfdf)
                         if (!dig.checkdiggerunderbag(h, v + 1))
-                            bagdat[bag].wobbling = true;
+                            selectedBag.setWobbling(true);
                 } else {
-                    bagdat[bag].wt = 15;
-                    bagdat[bag].wobbling = false;
+                    selectedBag.setWt(15);
+                    selectedBag.setWobbling(false);
                 }
                 break;
             case 0:
             case 4:
                 if (xr == 0)
                     if (y < 180 && (dig.getMonster().getfield(h, v + 1) & 0xfdf) != 0xfdf) {
-                        bagdat[bag].dir = 6;
-                        bagdat[bag].wt = 0;
+                        selectedBag.setDir(6);
+                        selectedBag.setWt(0);
                         dig.getSound().soundfall();
                     } else
                         baghitground(bag);
                 break;
             case 6:
                 if (yr == 0)
-                    bagdat[bag].fallh++;
+                    selectedBag.setFallh(selectedBag.getFallh() + 1);
                 if (y >= 180)
                     baghitground(bag);
                 else if ((dig.getMonster().getfield(h, v + 1) & 0xfdf) == 0xfdf)
                     if (yr == 0)
                         baghitground(bag);
-                dig.getMonster().checkmonscared(bagdat[bag].h);
+                dig.getMonster().checkmonscared(selectedBag.getH());
         }
-        if (bagdat[bag].dir != -1)
-            if (bagdat[bag].dir != 6 && pushcount != 0)
+        if (selectedBag.getDir() != -1)
+            if (selectedBag.getDir() != 6 && pushcount != 0)
                 pushcount--;
             else
-                pushbag(bag, bagdat[bag].dir);
+                pushbag(bag, selectedBag.getDir());
     }
 }

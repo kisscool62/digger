@@ -17,7 +17,7 @@ class Input {
     private boolean firepressed = false;
     private boolean minuspressed = false;
     private boolean pluspressed = false;
-    private boolean f10pressed= false;
+    private boolean f10pressed = false;
 
     @Getter
     @Setter
@@ -54,15 +54,15 @@ class Input {
         dig = d;
     }
 
-    public void resetKeyPressed(){
+    public void resetKeyPressed() {
         keypressed = 0;
     }
 
-    public void resetAKeyPressed(){
+    public void resetAKeyPressed() {
         akeypressed = 0;
     }
 
-    void checkkeyb() {
+    private void checkkeyb() {
         if (pluspressed) {
             if (dig.getFrametime() > Digger.MIN_RATE)
                 dig.setFrametime(dig.getFrametime() - 5);
@@ -89,16 +89,16 @@ class Input {
   } */
     }
 
-    public boolean isKeyPressed(int key){
+    public boolean isKeyPressed(int key) {
         return (dig.getInput().keypressed & key) == 0 && dig.getInput().keypressed != 0;
     }
 
-    void detectjoy() {
+    protected void detectjoy() {
         joyflag = false;
         staticdir = dynamicdir = -1;
     }
 
-    int getasciikey(int make) {
+    protected int getasciikey(int make) {
         int k;
         if ((make == ' ') || ((make >= 'a') && (make <= 'z')) || ((make >= '0') && (make <= '9')))
             return make;
@@ -114,7 +114,7 @@ class Input {
 	k+='A'-'a'; */
     }
 
-    int getdir() {
+    private int getdir() {
         int bp2 = keydir;
 /*  if (joyflag) {
 	bp2=-1;
@@ -132,63 +132,63 @@ class Input {
         return bp2;
     }
 
-    void initkeyb() {
+    protected void initkeyb() {
     }
 
-    void Key_downpressed() {
+    private void Key_downpressed() {
         downpressed = true;
         dynamicdir = staticdir = 6;
     }
 
-    void Key_downreleased() {
+    private void Key_downreleased() {
         downpressed = false;
         if (dynamicdir == 6)
             setdirec();
     }
 
-    void Key_f1pressed() {
+    private void Key_f1pressed() {
         firepressed = true;
         f1pressed = true;
     }
 
-    void Key_f1released() {
+    private void Key_f1released() {
         f1pressed = false;
     }
 
-    void Key_leftpressed() {
+    private void Key_leftpressed() {
         leftpressed = true;
         dynamicdir = staticdir = 4;
     }
 
-    void Key_leftreleased() {
+    private void Key_leftreleased() {
         leftpressed = false;
         if (dynamicdir == 4)
             setdirec();
     }
 
-    void Key_rightpressed() {
+    private void Key_rightpressed() {
         rightpressed = true;
         dynamicdir = staticdir = 0;
     }
 
-    void Key_rightreleased() {
+    private void Key_rightreleased() {
         rightpressed = false;
         if (dynamicdir == 0)
             setdirec();
     }
 
-    void Key_uppressed() {
+    private void Key_uppressed() {
         uppressed = true;
         dynamicdir = staticdir = 2;
     }
 
-    void Key_upreleased() {
+    private void Key_upreleased() {
         uppressed = false;
         if (dynamicdir == 2)
             setdirec();
     }
 
-    void processkey(int key) {
+    private void processkey(int key) {
         keypressed = key;
         if (key > 0x80)
             akeypressed = key & 0x7f;
@@ -244,7 +244,7 @@ class Input {
         }
     }
 
-    void readdir() {
+    protected void readdir() {
 /*  int j; */
         keydir = staticdir;
         if (dynamicdir != -1)
@@ -274,10 +274,10 @@ class Input {
   } */
     }
 
-    void readjoy() {
+    private void readjoy() {
     }
 
-    void setdirec() {
+    private void setdirec() {
         dynamicdir = -1;
         if (uppressed) dynamicdir = staticdir = 2;
         if (downpressed) dynamicdir = staticdir = 6;
@@ -285,7 +285,7 @@ class Input {
         if (rightpressed) dynamicdir = staticdir = 0;
     }
 
-    boolean teststart() {
+    protected boolean teststart() {
 /*  int j; */
         boolean startf = false;
 /*  if (joyflag) {
