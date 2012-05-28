@@ -62,7 +62,7 @@ class Input {
         akeypressed = 0;
     }
 
-    private void checkkeyb() {
+    protected void checkkeyb() {
         if (pluspressed) {
             if (dig.getFrametime() > Digger.MIN_RATE)
                 dig.setFrametime(dig.getFrametime() - 5);
@@ -114,7 +114,7 @@ class Input {
 	k+='A'-'a'; */
     }
 
-    private int getdir() {
+    protected int getdir() {
         int bp2 = keydir;
 /*  if (joyflag) {
 	bp2=-1;
@@ -188,7 +188,7 @@ class Input {
             setdirec();
     }
 
-    private void processkey(int key) {
+    protected void processkey(int key) {
         keypressed = key;
         if (key > 0x80)
             akeypressed = key & 0x7f;

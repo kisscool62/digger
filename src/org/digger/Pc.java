@@ -1,6 +1,7 @@
 package org.digger;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.awt.image.MemoryImageSource;
@@ -9,12 +10,18 @@ class Pc {
 
     private Digger dig;
 
+    @Getter
     private Image[] image = new Image[2];
+
+    @Setter
+    @Getter
     private Image currentImage;
 
+    @Getter
     private MemoryImageSource[] source = new MemoryImageSource[2];
 
     @Getter
+    @Setter
     private MemoryImageSource currentSource;
 
     @Getter
@@ -24,8 +31,11 @@ class Pc {
     private int height = 200;
     private int size = width * height;
 
+    @Getter
+    @Setter
     private int[] pixels;
 
+    @Getter
     private byte[][][] pal = {
 
             {{0, (byte) 0x00, (byte) 0xAA, (byte) 0xAA},
@@ -72,7 +82,7 @@ class Pc {
 
     }
 
-    private int ggetpix(int x, int y) {
+    protected int ggetpix(int x, int y) {
         int ofs = width * y + x & 0xfffc;
         return (((((pixels[ofs] << 2) | pixels[ofs + 1]) << 2) | pixels[ofs + 2]) << 2) | pixels[ofs + 3];
     }

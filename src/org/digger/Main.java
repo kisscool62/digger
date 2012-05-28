@@ -118,7 +118,7 @@ class Main {
     }
 
     protected void addlife(int pl) {
-        gamedat[pl - 1].lives++;
+        gamedat[pl - 1].increaseLives();
         dig.getSound().sound1up();
     }
 
@@ -130,9 +130,9 @@ class Main {
 
     private void checklevdone() {
         if ((dig.countem() == 0 || dig.getMonster().monleft() == 0) && dig.isDigonscr())
-            gamedat[curplayer].levdone = true;
+            gamedat[curplayer].setLevelDone();
         else
-            gamedat[curplayer].levdone = false;
+            gamedat[curplayer].setLevelUnDone();
     }
 
     protected void cleartopline() {
@@ -160,7 +160,7 @@ class Main {
     }
 
     protected int getlives(int pl) {
-        return gamedat[pl - 1].lives;
+        return gamedat[pl - 1].getLives();
     }
 
     protected void incpenalty() {
@@ -174,7 +174,7 @@ class Main {
     }
 
     private void initlevel() {
-        gamedat[curplayer].levdone = false;
+        gamedat[curplayer].setLevelUnDone();
         dig.getDrawing().makefield();
         dig.makeemfield();
         dig.getBags().initbags();
@@ -182,13 +182,13 @@ class Main {
     }
 
     private int levno() {
-        return gamedat[curplayer].level;
+        return gamedat[curplayer].getLevel();
     }
 
     protected int levof10() {
-        if (gamedat[curplayer].level > 10)
+        if (gamedat[curplayer].getLevel() > 10)
             return 10;
-        return gamedat[curplayer].level;
+        return gamedat[curplayer].getLevel();
     }
 
     protected int levplan() {
@@ -303,13 +303,13 @@ class Main {
                 if (frame > 250)
                     frame = 0;
             }
-            gamedat[0].level = 1;
-            gamedat[0].lives = 3;
+            gamedat[0].setLevel(1);
+            gamedat[0].setLives(3);
             if (nplayers == 2) {
-                gamedat[1].level = 1;
-                gamedat[1].lives = 3;
+                gamedat[1].setLevel(1);
+                gamedat[1].setLives(3);
             } else
-                gamedat[1].lives = 0;
+                gamedat[1].setLives(0);
             dig.getPc().gclear();
             curplayer = 0;
             initlevel();
@@ -324,13 +324,13 @@ class Main {
 //	  break;
 //    if (recording)
 //	  recputinit();
-            while ((gamedat[0].lives != 0 || gamedat[1].lives != 0) && !dig.getInput().isEscape()) {
-                gamedat[curplayer].dead = false;
-                while (!gamedat[curplayer].dead && gamedat[curplayer].lives != 0 && !dig.getInput().isEscape()) {
+            while ((gamedat[0].getLives() != 0 || gamedat[1].getLives() != 0) && !dig.getInput().isEscape()) {
+                gamedat[curplayer].makeNotDead();
+                while (!gamedat[curplayer].isDead() && gamedat[curplayer].getLives() != 0 && !dig.getInput().isEscape()) {
                     dig.getDrawing().initmbspr();
                     play();
                 }
-                if (gamedat[1 - curplayer].lives != 0) {
+                if (gamedat[1 - curplayer].getLives() != 0) {
                     curplayer = 1 - curplayer;
                     flashplayer = levnotdrawn = true;
                 }
@@ -384,7 +384,7 @@ class Main {
         dig.getSound().music(1);
         dig.getInput().readdir();
         dig.setTime(dig.getPc().gethrt());
-        while (!gamedat[curplayer].dead && !gamedat[curplayer].levdone && !dig.getInput().isEscape()) {
+        while (!gamedat[curplayer].isDead() && !gamedat[curplayer].isLevdone() && !dig.getInput().isEscape()) {
             penalty = 0;
             dig.dodigger();
             dig.getMonster().domonsters();
@@ -419,24 +419,24 @@ class Main {
         dig.getDrawing().savefield();
         dig.getMonster().erasemonsters();
         dig.newframe();        // needed by Java version!!
-        if (gamedat[curplayer].levdone)
+        if (gamedat[curplayer].isLevdone())
             dig.getSound().soundlevdone();
         if (dig.countem() == 0) {
-            gamedat[curplayer].level++;
-            if (gamedat[curplayer].level > 1000)
-                gamedat[curplayer].level = 1000;
+            gamedat[curplayer].increaseLevel();
+            if (gamedat[curplayer].getLevel() > 1000)
+                gamedat[curplayer].setLevel(1000);
             initlevel();
         }
-        if (gamedat[curplayer].dead) {
-            gamedat[curplayer].lives--;
+        if (gamedat[curplayer].isDead()) {
+            gamedat[curplayer].decreaseLives();
             dig.getDrawing().drawlives();
-            if (gamedat[curplayer].lives == 0 && !dig.getInput().isEscape())
+            if (gamedat[curplayer].getLives() == 0 && !dig.getInput().isEscape())
                 dig.getScores().endofgame();
         }
-        if (gamedat[curplayer].levdone) {
-            gamedat[curplayer].level++;
-            if (gamedat[curplayer].level > 1000)
-                gamedat[curplayer].level = 1000;
+        if (gamedat[curplayer].isLevdone()) {
+            gamedat[curplayer].increaseLevel();
+            if (gamedat[curplayer].getLevel() > 1000)
+                gamedat[curplayer].setLevel(1000);
             initlevel();
         }
     }
@@ -447,7 +447,7 @@ class Main {
     }
 
     protected void setdead(boolean bp6) {
-        gamedat[curplayer].dead = bp6;
+        gamedat[curplayer].setDead(bp6);
     }
 
     private void shownplayers() {
@@ -466,7 +466,7 @@ class Main {
 
     private void testpause() {
         if (dig.getInput().getAkeypressed() == 32) { /* Space bar */
-            dig.getInput().resetAKeyPressed();;
+            dig.getInput().resetAKeyPressed();
             dig.getSound().soundpause();
             dig.getSound().sett2val(40);
             dig.getSound().setsoundt2();

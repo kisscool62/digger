@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.IndexColorModel;
+import java.awt.image.MemoryImageSource;
 
 public class Digger extends java.applet.Applet implements Runnable {
 
@@ -136,7 +137,7 @@ public class Digger extends java.applet.Applet implements Runnable {
         pc = new Pc(this);
     }
 
-    public void shifftEatmsc(){
+    public void shifftEatmsc() {
         eatmsc <<= 1;
     }
 
@@ -378,17 +379,17 @@ public class Digger extends java.applet.Applet implements Runnable {
         } catch (Exception e) {
         }
 
-        pc.pixels = new int[65536];
+        pc.setPixels(new int[65536]);
 
         for (int i = 0; i < 2; i++) {
-            pc.source[i] = new MemoryImageSource(pc.width, pc.height, new IndexColorModel(8, 4, pc.pal[i][0], pc.pal[i][1], pc.pal[i][2]), pc.pixels, 0, pc.width);
-            pc.source[i].setAnimated(true);
-            pc.image[i] = createImage(pc.source[i]);
-            pc.source[i].newPixels();
+            pc.getSource()[i] = new MemoryImageSource(pc.getWidth(), pc.getHeight(), new IndexColorModel(8, 4, pc.getPal()[i][0], pc.getPal()[i][1], pc.getPal()[i][2]), pc.getPixels(), 0, pc.getWidth());
+            pc.getSource()[i].setAnimated(true);
+            pc.getImage()[i] = createImage(pc.getSource()[i]);
+            pc.getSource()[i].newPixels();
         }
 
-        pc.currentImage = pc.image[0];
-        pc.currentSource = pc.source[0];
+        pc.setCurrentImage(pc.getImage()[0]);
+        pc.setCurrentSource(pc.getSource()[0]);
 
         gamethread = new Thread(this);
         gamethread.start();
@@ -524,7 +525,7 @@ public class Digger extends java.applet.Applet implements Runnable {
             } catch (Exception e) {
             }
         }
-        pc.currentSource.newPixels();
+        pc.getCurrentSource().newPixels();
     }
 
     public void paint(Graphics g) {
@@ -554,7 +555,7 @@ public class Digger extends java.applet.Applet implements Runnable {
     }
 
     public void update(Graphics g) {
-        g.drawImage(pc.currentImage, 0, 0, this);
+        g.drawImage(pc.getCurrentImage(), 0, 0, this);
     }
 
     private void updatedigger() {
