@@ -175,7 +175,7 @@ public class Digger extends java.applet.Applet implements Runnable {
                 if (bags.bagy(deathbag) + 6 > diggery)
                     diggery = bags.bagy(deathbag) + 6;
                 drawing.drawdigger(15, diggerx, diggery, false);
-                main.incpenalty();
+                main.increasePenalty();
                 if (bags.getbagdir(deathbag) + 1 == 0) {
                     sound.soundddie();
                     deathtime = 5;
@@ -192,7 +192,7 @@ public class Digger extends java.applet.Applet implements Runnable {
                 if (deathani == 0)
                     sound.music(2);
                 clbits = drawing.drawdigger(14 - deathani, diggerx, diggery, false);
-                main.incpenalty();
+                main.increasePenalty();
                 if (deathani == 0 && ((clbits & 0x3f00) != 0))
                     monster.killmonsters(clbits);
                 if (deathani < 4) {
@@ -216,7 +216,7 @@ public class Digger extends java.applet.Applet implements Runnable {
                     drawing.drawdigger(15, diggerx, diggery - deatharc[deathani], false);
                     if (deathani == 6)
                         sound.musicoff();
-                    main.incpenalty();
+                    main.increasePenalty();
                     deathani++;
                     if (deathani == 1)
                         sound.soundddie();
@@ -245,7 +245,7 @@ public class Digger extends java.applet.Applet implements Runnable {
             if (digonscr)
                 if (digtime != 0) {
                     drawing.drawdigger(digmdir, diggerx, diggery, notfiring && rechargetime == 0);
-                    main.incpenalty();
+                    main.increasePenalty();
                     digtime--;
                 } else
                     updatedigger();
@@ -300,7 +300,7 @@ public class Digger extends java.applet.Applet implements Runnable {
             case 2:
             case 3:
                 drawing.drawfire(firex, firey, expsn);
-                main.incpenalty();
+                main.increasePenalty();
                 expsn++;
                 break;
             default:
@@ -351,11 +351,11 @@ public class Digger extends java.applet.Applet implements Runnable {
         if ((emfield[y * 15 + x] & emmask) != 0) {
             if (r == embox[dir]) {
                 drawing.drawemerald(x * 20 + 12, y * 18 + 21);
-                main.incpenalty();
+                main.increasePenalty();
             }
             if (r == embox[dir + 1]) {
                 drawing.eraseemerald(x * 20 + 12, y * 18 + 21);
-                main.incpenalty();
+                main.increasePenalty();
                 hit = true;
                 emfield[y * 15 + x] &= ~emmask;
             }
@@ -608,7 +608,7 @@ public class Digger extends java.applet.Applet implements Runnable {
             emocttime = 9;
         }
         clbits = drawing.drawdigger(digdir, diggerx, diggery, notfiring && rechargetime == 0);
-        main.incpenalty();
+        main.increasePenalty();
         if ((bags.bagbits() & clbits) != 0) {
             if (digmdir == 0 || digmdir == 4) {
                 push = bags.pushbags(digmdir, clbits);
@@ -619,7 +619,7 @@ public class Digger extends java.applet.Applet implements Runnable {
                 diggerx = diggerox;
                 diggery = diggeroy;
                 drawing.drawdigger(digmdir, diggerx, diggery, notfiring && rechargetime == 0);
-                main.incpenalty();
+                main.increasePenalty();
                 digdir = reversedir(digmdir);
             }
         }
@@ -694,7 +694,7 @@ public class Digger extends java.applet.Applet implements Runnable {
                     break;
             }
             clbits = drawing.drawfire(firex, firey, 0);
-            main.incpenalty();
+            main.increasePenalty();
             if ((clbits & 0x3f00) != 0)
                 for (mon = 0, b = 256; mon < 6; mon++, b <<= 1)
                     if ((clbits & b) != 0) {

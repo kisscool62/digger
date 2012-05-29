@@ -92,9 +92,9 @@ class Scores implements Runnable {
                 nextbs2 += bonusscore;
             }
         }
-        dig.getMain().incpenalty();
-        dig.getMain().incpenalty();
-        dig.getMain().incpenalty();
+        dig.getMain().increasePenalty();
+        dig.getMain().increasePenalty();
+        dig.getMain().increasePenalty();
     }
 
     protected void drawscores() {

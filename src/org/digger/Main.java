@@ -32,6 +32,7 @@ class Main {
     private int randv;
 
     private String leveldat[][] =        // [8][10][15]
+            //S=Stop, B=Bag, H=horizontal way, V=vertical way, C=Diamond
             {{"S   B     HHHHS",
                     "V  CC  C  V B  ",
                     "VB CC  C  V    ",
@@ -163,7 +164,7 @@ class Main {
         return gamedat[pl - 1].getLives();
     }
 
-    protected void incpenalty() {
+    protected void increasePenalty() {
         penalty++;
     }
 

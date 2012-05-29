@@ -300,7 +300,7 @@ class Drawing {
 
     protected void eatfield(int x, int y, int dir) {
         int h = (x - 12) / 20, xr = ((x - 12) % 20) / 4, v = (y - 18) / 18, yr = ((y - 18) % 18) / 3;
-        dig.getMain().incpenalty();
+        dig.getMain().increasePenalty();
         switch (dir) {
             case 0:
                 h++;

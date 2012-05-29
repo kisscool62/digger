@@ -256,8 +256,8 @@ class Input {
             firepflag = false;
         firepressed = false;
 /*  if (joyflag) {
-	incpenalty();
-	incpenalty();
+	increasePenalty();
+	increasePenalty();
 	joyanay=0;
 	joyanax=0;
 	for (j=0;j<4;j++) {

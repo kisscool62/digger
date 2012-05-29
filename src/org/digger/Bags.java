@@ -35,7 +35,7 @@ class Bags {
         bagdat[bag].setWt(15);
         bagdat[bag].setWobbling(false);
         clbits = dig.getDrawing().drawgold(bag, 0, bagdat[bag].getX(), bagdat[bag].getY());
-        dig.getMain().incpenalty();
+        dig.getMain().increasePenalty();
         for (bn = 1, b = 2; bn < 8; bn++, b <<= 1)
             if ((b & clbits) != 0)
                 removebag(bn);
@@ -71,15 +71,15 @@ class Bags {
                     if (bagdat[bag].getGt() == 1) {
                         dig.getSound().soundbreak();
                         dig.getDrawing().drawgold(bag, 4, bagdat[bag].getX(), bagdat[bag].getY());
-                        dig.getMain().incpenalty();
+                        dig.getMain().increasePenalty();
                     }
                     if (bagdat[bag].getGt() == 3) {
                         dig.getDrawing().drawgold(bag, 5, bagdat[bag].getX(), bagdat[bag].getY());
-                        dig.getMain().incpenalty();
+                        dig.getMain().increasePenalty();
                     }
                     if (bagdat[bag].getGt() == 5) {
                         dig.getDrawing().drawgold(bag, 6, bagdat[bag].getX(), bagdat[bag].getY());
-                        dig.getMain().incpenalty();
+                        dig.getMain().increasePenalty();
                     }
                     bagdat[bag].setGt(bagdat[bag].getGt() + 1);
                     if (bagdat[bag].getGt() == goldtime)
@@ -123,7 +123,7 @@ class Bags {
     private void getgold(int bag) {
         int clbits;
         clbits = dig.getDrawing().drawgold(bag, 6, bagdat[bag].getX(), bagdat[bag].getY());
-        dig.getMain().incpenalty();
+        dig.getMain().increasePenalty();
         if ((clbits & 1) != 0) {
             dig.getScores().scoregold();
             dig.getSound().soundgold();
@@ -189,7 +189,7 @@ class Bags {
         }
         if (selectedBag.getDir() == 6 && (dir == 4 || dir == 0)) {
             clbits = dig.getDrawing().drawgold(bag, 3, x, y);
-            dig.getMain().incpenalty();
+            dig.getMain().increasePenalty();
             if (((clbits & 1) != 0) && (dig.getDiggery() >= y))
                 dig.killdigger(1, bag);
             if ((clbits & 0x3f00) != 0)
@@ -221,7 +221,7 @@ class Bags {
             switch (dir) {
                 case 6:
                     clbits = dig.getDrawing().drawgold(bag, 3, x, y);
-                    dig.getMain().incpenalty();
+                    dig.getMain().increasePenalty();
                     if (((clbits & 1) != 0) && dig.getDiggery() >= y)
                         dig.killdigger(1, bag);
                     if ((clbits & 0x3f00) != 0)
@@ -232,21 +232,21 @@ class Bags {
                     selectedBag.setWt(15);
                     selectedBag.setWobbling(false);
                     clbits = dig.getDrawing().drawgold(bag, 0, x, y);
-                    dig.getMain().incpenalty();
+                    dig.getMain().increasePenalty();
                     pushcount = 1;
                     if ((clbits & 0xfe) != 0)
                         if (!pushbags(dir, clbits)) {
                             x = ox;
                             y = oy;
                             dig.getDrawing().drawgold(bag, 0, ox, oy);
-                            dig.getMain().incpenalty();
+                            dig.getMain().increasePenalty();
                             push = false;
                         }
                     if (((clbits & 1) != 0) || ((clbits & 0x3f00) != 0)) {
                         x = ox;
                         y = oy;
                         dig.getDrawing().drawgold(bag, 0, ox, oy);
-                        dig.getMain().incpenalty();
+                        dig.getMain().increasePenalty();
                         push = false;
                     }
             }
@@ -323,7 +323,7 @@ class Bags {
                         wbl = selectedBag.getWt() % 8;
                         if (!((wbl & 1) != 0)) {
                             dig.getDrawing().drawgold(bag, wblanim[wbl >> 1], x, y);
-                            dig.getMain().incpenalty();
+                            dig.getMain().increasePenalty();
                             dig.getSound().soundwobble();
                         }
                     } else if ((dig.getMonster().getfield(h, v + 1) & 0xfdf) != 0xfdf)

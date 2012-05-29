@@ -135,7 +135,7 @@ class Monster {
         int m, b;
         for (m = 0, b = 256; m < 6; m++, b <<= 1) {
             if ((bits & b) != 0)
-                dig.getMain().incpenalty();
+                dig.getMain().increasePenalty();
             b <<= 1;
         }
     }
@@ -377,7 +377,7 @@ class Monster {
 
         push = true;
         clbits = dig.getDrawing().drawmon(mon, mondat[mon].isNob(), mondat[mon].getHdir(), mondat[mon].getX(), mondat[mon].getY());
-        dig.getMain().incpenalty();
+        dig.getMain().increasePenalty();
 
         /* Collision with another monster */
 
@@ -413,7 +413,7 @@ class Monster {
         if (!push) {
             mondat[mon].dontMoveFrom(monox, monoy);
             dig.getDrawing().drawmon(mon, mondat[mon].isNob(), mondat[mon].getHdir(), mondat[mon].getX(), mondat[mon].getY());
-            dig.getMain().incpenalty();
+            dig.getMain().increasePenalty();
             if (mondat[mon].isNob()) /* The other way to create hobbin: stuck on h-bag */
                 mondat[mon].increaseHobbinCounter();
             if ((mondat[mon].getDir() == 2 || mondat[mon].getDir() == 6) && mondat[mon].isNob())
@@ -444,7 +444,7 @@ class Monster {
                 if (dig.getBags().bagy(mondat[mon].getBag()) + 6 > mondat[mon].getY())
                     mondat[mon].setY(dig.getBags().bagy(mondat[mon].getBag()));
                 dig.getDrawing().drawmondie(mon, mondat[mon].isNob(), mondat[mon].getHdir(), mondat[mon].getX(), mondat[mon].getY());
-                dig.getMain().incpenalty();
+                dig.getMain().increasePenalty();
                 if (dig.getBags().getbagdir(mondat[mon].getBag()) == -1) {
                     mondat[mon].setDtime(1);
                     mondat[mon].setDeath(4);
