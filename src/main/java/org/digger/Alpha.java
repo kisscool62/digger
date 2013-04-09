@@ -1,6 +1,6 @@
 package org.digger;
 
-abstract class alpha {
+abstract class Alpha {
 
     static String copyright = "Portions Copyright(c) 1983 Windmill Software Inc.";
 

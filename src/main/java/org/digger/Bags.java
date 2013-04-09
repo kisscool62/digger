@@ -2,7 +2,7 @@ package org.digger;
 
 class Bags {
 
-    private Digger dig;
+    private org.digger.Digger dig;
 
     private _bag[] bagdat1 = {new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag()};
     private _bag[] bagdat2 = {new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag()};
@@ -13,15 +13,16 @@ class Bags {
 
     private int wblanim[] = {2, 0, 1, 0};    // [4]
 
-    Bags(Digger d) {
+    Bags(org.digger.Digger d) {
         dig = d;
     }
 
     protected int bagbits() {
         int bag, b, bags = 0;
         for (bag = 1, b = 2; bag < 8; bag++, b <<= 1)
-            if (bagdat[bag].isExist())
+            if (bagdat[bag].isExist()) {
                 bags |= b;
+            }
         return bags;
     }
 

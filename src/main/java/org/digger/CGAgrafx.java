@@ -1,6 +1,6 @@
 package org.digger;
 
-abstract class cgagrafx {
+abstract class CGAgrafx {
 
     static short cgazero60[] = {
             0x00, 0x00, 0x00, 0x00,

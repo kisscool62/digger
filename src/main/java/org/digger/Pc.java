@@ -130,8 +130,8 @@ class Pc {
 
     protected void gputim(int x, int y, int ch, int w, int h) {
 
-        short[] spr = cgagrafx.cgatable[ch * 2];
-        short[] msk = cgagrafx.cgatable[ch * 2 + 1];
+        short[] spr = CGAgrafx.cgatable[ch * 2];
+        short[] msk = CGAgrafx.cgatable[ch * 2 + 1];
 
         int src = 0;
         int dest = y * width + (x & 0xfffc);
@@ -169,16 +169,16 @@ class Pc {
 
         while (true) {
 
-            if (src >= cgagrafx.cgatitledat.length)
+            if (src >= CGAgrafx.cgatitledat.length)
                 break;
 
-            int b = cgagrafx.cgatitledat[src++], l, c;
+            int b = CGAgrafx.cgatitledat[src++], l, c;
 
             if (b == 0xfe) {
-                l = cgagrafx.cgatitledat[src++];
+                l = CGAgrafx.cgatitledat[src++];
                 if (l == 0)
                     l = 256;
-                c = cgagrafx.cgatitledat[src++];
+                c = CGAgrafx.cgatitledat[src++];
             } else {
                 l = 1;
                 c = b;
@@ -221,7 +221,7 @@ class Pc {
         if ((ch < 0) || (ch > 0x5f))
             return;
 
-        short[] chartab = alpha.ascii2cga[ch];
+        short[] chartab = Alpha.ascii2cga[ch];
 
         if (chartab == null)
             return;
