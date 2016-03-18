@@ -1,19 +1,19 @@
 package org.digger;
 
-class Bags {
+class BagManager {
 
     private org.digger.Digger dig;
 
-    private _bag[] bagdat1 = {new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag()};
-    private _bag[] bagdat2 = {new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag()};
-    private _bag[] bagdat = {new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag(), new _bag()};
+    private Bag[] bagdat1 = {new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag()};
+    private Bag[] bagdat2 = {new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag()};
+    private Bag[] bagdat = {new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag(), new Bag()};
 
     private int pushcount = 0;
     private int goldtime = 0;
 
     private int wblanim[] = {2, 0, 1, 0};    // [4]
 
-    Bags(org.digger.Digger d) {
+    BagManager(org.digger.Digger d) {
         dig = d;
     }
 
@@ -179,7 +179,7 @@ class Bags {
     private boolean pushbag(int bag, int dir) {
         int x, y, h, v, ox, oy, clbits;
         boolean push = true;
-        _bag selectedBag = bagdat[bag];
+        Bag selectedBag = bagdat[bag];
         ox = x = selectedBag.getX();
         oy = y = selectedBag.getY();
         h = selectedBag.getH();
@@ -288,7 +288,7 @@ class Bags {
     }
 
     private void removebag(int bag) {
-        _bag selectedBag = bagdat[bag];
+        Bag selectedBag = bagdat[bag];
         if (selectedBag.isExist()) {
             selectedBag.setExist(false);
             dig.getSprite().erasespr(bag);
@@ -304,7 +304,7 @@ class Bags {
 
     private void updatebag(int bag) {
         int x, h, xr, y, v, yr, wbl;
-        _bag selectedBag = bagdat[bag];
+        Bag selectedBag = bagdat[bag];
         x = selectedBag.getX();
         h = selectedBag.getH();
         xr = selectedBag.getXr();

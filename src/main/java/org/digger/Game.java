@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-class _game {
+class Game {
 
     @Setter
     private int lives;

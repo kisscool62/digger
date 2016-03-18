@@ -10,7 +10,7 @@ class Main {
 
     private int digsprorder[] = {14, 13, 7, 6, 5, 4, 3, 2, 1, 12, 11, 10, 9, 8, 15, 0};    // [16]
 
-    private _game[] gamedat = {new _game(), new _game()};
+    private Game[] gamedat = {new Game(), new Game()};
 
     @Getter
     @Setter
@@ -144,7 +144,7 @@ class Main {
     private void drawscreen() {
         dig.getDrawing().creatembspr();
         dig.getDrawing().drawstatics();
-        dig.getBags().drawbags();
+        dig.getBagManager().drawbags();
         dig.drawemeralds();
         dig.initdigger();
         dig.getMonster().initmonsters();
@@ -178,7 +178,7 @@ class Main {
         gamedat[curplayer].setLevelUnDone();
         dig.getDrawing().makefield();
         dig.makeemfield();
-        dig.getBags().initbags();
+        dig.getBagManager().initbags();
         levnotdrawn = true;
     }
 
@@ -347,7 +347,7 @@ class Main {
     private void play() {
         int t, c;
 /*  if (playing)
-	randv=recgetrand();
+    randv=recgetrand();
   else
 	randv=getlrt();
   if (recording)
@@ -389,7 +389,7 @@ class Main {
             penalty = 0;
             dig.dodigger();
             dig.getMonster().domonsters();
-            dig.getBags().dobags();
+            dig.getBagManager().dobags();
 /*  if (penalty<8)
 	  for (t=(8-penalty)*5;t>0;t--)
 		olddelay(1); */
@@ -401,11 +401,11 @@ class Main {
         dig.erasedigger();
         dig.getSound().musicoff();
         t = 20;
-        while ((dig.getBags().getnmovingbags() != 0 || t != 0) && !dig.getInput().isEscape()) {
+        while ((dig.getBagManager().getnmovingbags() != 0 || t != 0) && !dig.getInput().isEscape()) {
             if (t != 0)
                 t--;
             penalty = 0;
-            dig.getBags().dobags();
+            dig.getBagManager().dobags();
             dig.dodigger();
             dig.getMonster().domonsters();
             if (penalty < 8)
@@ -416,7 +416,7 @@ class Main {
         dig.getSound().soundstop();
         dig.killfire();
         dig.erasebonus();
-        dig.getBags().cleanupbags();
+        dig.getBagManager().cleanupbags();
         dig.getDrawing().savefield();
         dig.getMonster().erasemonsters();
         dig.newframe();        // needed by Java version!!

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-class _bag {
+class Bag {
     private int x;
     private int y;
     private int h;
@@ -20,7 +20,7 @@ class _bag {
     private boolean unfallen;
     private boolean exist;
 
-    void copyFrom(_bag t) {
+    void copyFrom(Bag t) {
         x = t.x;
         y = t.y;
         h = t.h;

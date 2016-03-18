@@ -29,7 +29,7 @@ public class Digger extends java.applet.Applet implements Runnable {
     private String subaddr;
 
     @Getter
-    private Bags bags;
+    private BagManager bagManager;
 
     @Getter
     private Main main;
@@ -38,7 +38,7 @@ public class Digger extends java.applet.Applet implements Runnable {
     private Sound sound;
 
     @Getter
-    private Monster monster;
+    private MonsterManager monster;
 
     @Getter
     private Scores scores;
@@ -125,10 +125,10 @@ public class Digger extends java.applet.Applet implements Runnable {
     private int deatharc[] = {3, 5, 6, 6, 5, 3, 0};            // [7]
 
     public Digger() {
-        bags = new Bags(this);
+        bagManager = new BagManager(this);
         main = new Main(this);
         sound = new Sound(this);
-        monster = new Monster(this);
+        monster = new MonsterManager(this);
         scores = new Scores(this);
         sprite = new Sprite(this);
         drawing = new Drawing(this);
@@ -171,11 +171,11 @@ public class Digger extends java.applet.Applet implements Runnable {
         int clbits;
         switch (deathstage) {
             case 1:
-                if (bags.bagy(deathbag) + 6 > diggery)
-                    diggery = bags.bagy(deathbag) + 6;
+                if (bagManager.bagy(deathbag) + 6 > diggery)
+                    diggery = bagManager.bagy(deathbag) + 6;
                 drawing.drawdigger(15, diggerx, diggery, false);
                 main.increasePenalty();
-                if (bags.getbagdir(deathbag) + 1 == 0) {
+                if (bagManager.getbagdir(deathbag) + 1 == 0) {
                     sound.soundddie();
                     deathtime = 5;
                     deathstage = 2;
@@ -608,11 +608,11 @@ public class Digger extends java.applet.Applet implements Runnable {
         }
         clbits = drawing.drawdigger(digdir, diggerx, diggery, notfiring && rechargetime == 0);
         main.increasePenalty();
-        if ((bags.bagbits() & clbits) != 0) {
+        if ((bagManager.bagbits() & clbits) != 0) {
             if (digmdir == 0 || digmdir == 4) {
-                push = bags.pushbags(digmdir, clbits);
+                push = bagManager.pushbags(digmdir, clbits);
                 digtime++;
-            } else if (!bags.pushudbags(clbits))
+            } else if (!bagManager.pushudbags(clbits))
                 push = false;
             if (!push) { /* Strange, push not completely defined */
                 diggerx = diggerox;
